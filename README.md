@@ -1,7 +1,4 @@
-﻿Here is a `README.md` file for your **CompatLib** project. You can add it to your GitHub repository to provide clear documentation for users and contributors. 
-
-```markdown
-# CompatLib
+﻿# CompatLib
 
 **CompatLib** is a compatibility management library for **Vintage Story** modding. It provides tools to detect mod dependencies, handle compatibility conflicts, and streamline integration between mods. 
 
@@ -122,6 +119,3 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 ## Credits
 
 Developed by **Elocrypt** (elo).
-
----
-```
