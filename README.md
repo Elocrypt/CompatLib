@@ -90,7 +90,7 @@ CompatibilityManager.SetHandlerEnabled("targetmodid", "Handler for targetmodid",
 
 #### **Client Command**
 ```text
-/compatlog
+.compatlog
 ```
 - Displays conflict logs in the chat.
 
