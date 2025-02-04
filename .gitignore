@@ -11,6 +11,7 @@
 # Build results
 [Bb]in/
 [Oo]bj/
+[Ii]cons/
 
 # Visual Studio 2017/2019/2022 directory (if present)
 .vs/

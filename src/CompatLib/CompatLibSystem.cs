@@ -8,11 +8,14 @@ using Vintagestory.API.Server;
 namespace CompatLib
 {
     /// <summary>
-    /// Main mod system for CompatLib.
-    /// Initializes the library and processes compatibility handlers.
+    /// Represents the main mod system for CompatLib, responsible for initializing the library and processing compatibility handlers.
     /// </summary>
     public class CompatLibSystem : ModSystem
     {
+        /// <summary>
+        /// Called when the mod system starts. Initializes the mod system, registers commands, and logs the initialization process.
+        /// </summary>
+        /// <param name="api">The core API instance of the game.</param>
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
@@ -20,11 +23,13 @@ namespace CompatLib
             RegisterCommands(api);
         }
 
+        /// <summary>
+        /// Registers chat commands for displaying compatibility conflict logs.
+        /// </summary>
+        /// <param name="api">The core API instance of the game.</param>
         private void RegisterCommands(ICoreAPI api)
         {
-            // -----------------------------------
-            // CLIENT SIDE
-            // -----------------------------------
+            // Client-side command registration
             if (api is ICoreClientAPI capi)
             {
                 capi.ChatCommands
@@ -37,7 +42,7 @@ namespace CompatLib
                             capi.ShowChatMessage("No compatibility conflicts recorded.");
                             return TextCommandResult.Success();
                         }
-                        foreach (var log in AnalyticsManager.ConflictLogs)
+                        foreach (var log in AnalyticsManager.GetConflictLogs())
                         {
                             capi.ShowChatMessage(log);
                         }
@@ -45,9 +50,7 @@ namespace CompatLib
                     });
             }
 
-            // -----------------------------------
-            // SERVER SIDE
-            // -----------------------------------
+            // Server-side command registration
             if (api is ICoreServerAPI sapi)
             {
                 sapi.ChatCommands
@@ -62,7 +65,7 @@ namespace CompatLib
                             sapi.Logger.Notification("No compatibility conflicts recorded.");
                             return TextCommandResult.Success();
                         }
-                        foreach (var log in AnalyticsManager.ConflictLogs)
+                        foreach (var log in AnalyticsManager.GetConflictLogs())
                         {
                             sapi.Logger.Notification(log);
                         }
@@ -71,6 +74,10 @@ namespace CompatLib
             }
         }
 
+        /// <summary>
+        /// Called when the mod system starts on the server side. Processes compatibility handlers for each registered mod.
+        /// </summary>
+        /// <param name="api">The server API instance of the game.</param>
         public override void StartServerSide(ICoreServerAPI api)
         {
             api.Logger.Notification("CompatLib (server) active.");
@@ -89,6 +96,10 @@ namespace CompatLib
             }
         }
 
+        /// <summary>
+        /// Called when the mod system starts on the client side. Logs the activation of CompatLib on the client.
+        /// </summary>
+        /// <param name="api">The client API instance of the game.</param>
         public override void StartClientSide(ICoreClientAPI api)
         {
             api.Logger.Notification("CompatLib (client) active.");
